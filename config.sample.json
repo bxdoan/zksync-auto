@@ -1,0 +1,10 @@
+{
+  "network": {
+    "eth": "https://rpc.ankr.com/eth_goerli",
+    "zksync": "https://zksync2-testnet.zksync.dev"
+  },
+  "acc": {
+    "add": "0x123",
+    "pri": "123"
+  }
+}

@@ -11,6 +11,7 @@ from zksync2.signer.eth_signer import PrivateKeyEthSigner
 from zksync2.core.types import Token, ZkBlockParams, BridgeAddresses, EthBlockParams
 
 from zksync_auto.config import config
+from zksync_auto.account import AccountLoader
 
 
 class ZksyncAuto(object):
@@ -18,12 +19,13 @@ class ZksyncAuto(object):
     def __init__(self, **kwargs):
         self.network = config.network
         self.acc = config.acc
+        self.list_acc = AccountLoader().parser_file()
 
         self.web3 = ZkSyncBuilder.build(self.network.zksync)
         self.eth_web3 = Web3(Web3.HTTPProvider(self.network.eth))
         self.account: LocalAccount = Account.from_key(self.acc.pri)
 
-    def deposit(self, anount: int = None):
+    def deposit(self, anount: int or float = None):
         try:
             if not anount:
                 return
@@ -43,17 +45,39 @@ class ZksyncAuto(object):
         except Exception as _e:
             print(f"Error: {_e}")
 
-    def l1_balance(self):
-        eth_balance = self.eth_web3.eth.get_balance(self.account.address)
-        print(f"Eth: balance: {Web3.fromWei(eth_balance, 'ether')}")
+    def l1_balance(self, account: LocalAccount = None):
+        if not account:
+            account = self.account
+        eth_balance = self.eth_web3.eth.get_balance(account.address)
+        print(f"Eth balance: {Web3.fromWei(eth_balance, 'ether')}")
 
-    def l2_balance(self):
-        zk_balance = self.web3.zksync.get_balance(self.account.address, EthBlockParams.LATEST.value)
-        print(f"ZkSync balance: {zk_balance}")
+    def l2_balance(self, account: LocalAccount = None):
+        if not account:
+            account = self.account
+        zk_balance = self.web3.zksync.get_balance(account.address, EthBlockParams.LATEST.value)
+        print(f"ZkSync balance: {Web3.fromWei(zk_balance, 'ether')}")
+
+    def l2_balance_all(self):
+        for acc in self.list_acc:
+            if not acc.get('private_key'):
+                continue
+            print(f"Account: {acc['address']}")
+            account = Account.from_key(acc['private_key'].lower())
+            self.l2_balance(account=account)
+
+
+def process():
+    zksync_auto = ZksyncAuto()
+
+    # get zksync balance
+    zksync_auto.l2_balance_all()
+
+    # deposit eth to zksync
+    zksync_auto.deposit(anount=0.01)
+
+    # withdraw eth from zksync
+    # zksync_auto.withdraw(anount=0.01)
 
 
 if __name__ == "__main__":
-    zksync_auto = ZksyncAuto()
-    # zksync_auto.l1_balance()
-    zksync_auto.l2_balance()
-    # zksync_auto.deposit(anount=0.1)
+    process()

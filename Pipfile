@@ -9,6 +9,8 @@ requests = "*"
 python-dotenv = "*"
 python-json-config = "*"
 pytest = "*"
+openpyxl = "*"
+uniswap-python = "*"
 
 eip712_structs = "*"
 eth_account = "*"

@@ -7,9 +7,11 @@ from dotenv import load_dotenv
 load_dotenv()
 logger = logging.getLogger(__name__)
 CODE_HOME = os.path.abspath(os.path.dirname(__file__) + '/..')
+HOME_PACKAGE = os.path.abspath(os.path.dirname(__file__) + '/package')
 TMP_FOLDER = '/tmp'
 TMP_ZKSYNC = '/tmp/zksync'
 os.makedirs(TMP_ZKSYNC, exist_ok=True)
+ACC_PATH = os.path.join(os.path.dirname(__file__), os.pardir, os.environ.get('ACC_PATH'))
 
 
 def get_config():

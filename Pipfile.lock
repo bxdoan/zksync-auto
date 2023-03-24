@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ed038b765939863e98a0cbab77f6ada55b8c6e462b0ef7163586b2312973d8b1"
+            "sha256": "71e60294d74b9a2b1b2a978cb12663902df39a1c81fca022a7c1629838f02e69"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -236,6 +236,14 @@
             "markers": "python_full_version >= '3.7.0'",
             "version": "==3.1.0"
         },
+        "click": {
+            "hashes": [
+                "sha256:7682dc8afb30297001674575ea00d1814d808d6a36af415a82bd481d37ba7b8e",
+                "sha256:bb4d8133cb15a609f44e8213d9b391b0809795062913b383c62be0ee95b1db48"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==8.1.3"
+        },
         "cytoolz": {
             "hashes": [
                 "sha256:02975e2b1e61e47e9afa311f4c1783d155136fad37c54a1cebfe991c5a0798a1",
@@ -345,6 +353,14 @@
                 "sha256:b24400aef07b4d0287fb9bf8ce02b0abbe80c476d1b67222a7c5158df3a3e38d"
             ],
             "index": "pypi",
+            "version": "==1.1.0"
+        },
+        "et-xmlfile": {
+            "hashes": [
+                "sha256:8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c",
+                "sha256:a2ba85d1d6a74ef63837eed693bcb89c3f752169b0e3e7ae5b16ca5e1b3deada"
+            ],
+            "markers": "python_version >= '3.6'",
             "version": "==1.1.0"
         },
         "eth-abi": {
@@ -753,6 +769,14 @@
             ],
             "version": "==0.8.0"
         },
+        "openpyxl": {
+            "hashes": [
+                "sha256:a6f5977418eff3b2d5500d54d9db50c8277a368436f4e4f8ddb1be3422870184",
+                "sha256:f91456ead12ab3c6c2e9491cf33ba6d08357d802192379bb482f1033ade496f5"
+            ],
+            "index": "pypi",
+            "version": "==3.1.2"
+        },
         "packaging": {
             "hashes": [
                 "sha256:714ac14496c3e68c99c29b00845f7a2b85f3bb6f1078fd9f72fd20f0570002b2",
@@ -945,7 +969,7 @@
                 "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
                 "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==1.16.0"
         },
         "tomli": {
@@ -963,6 +987,22 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.12.0"
+        },
+        "typing-extensions": {
+            "hashes": [
+                "sha256:5cb5f4a79139d699607b3ef622a1dedafa84e115ab0024e0d9c044a9479ca7cb",
+                "sha256:fb33085c39dd998ac16d1431ebc293a8b3eedd00fd4a32de0ff79002c19511b4"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==4.5.0"
+        },
+        "uniswap-python": {
+            "hashes": [
+                "sha256:2c87d965e3ab6422d138309892906e9d8aca960162a1120fc414fe3b75f9e5f9",
+                "sha256:5df7ed4df7f9f174d7200466d3b374947398f644576b51794a7c190f63d7a393"
+            ],
+            "index": "pypi",
+            "version": "==0.6.2"
         },
         "urllib3": {
             "hashes": [

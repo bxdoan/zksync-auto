@@ -6,7 +6,7 @@ tmp/
 .csv
 .xlsx
 account.csv
-account.xslx
+account.xlsx
 account_full.xlsx
 
 # Ignore config files except config.test.json and config.sample.json

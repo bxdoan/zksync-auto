@@ -1,0 +1,14 @@
+clone:  # ensures all remote repos are fetched
+  depth: full
+
+pipelines:
+  branches:
+    master: # any push to master would trigger the backward merge (Long test circleci)
+      - step:
+          name: Backwards merge from master to develop
+          script:
+            - echo "Merging master into develop"
+            - git checkout develop
+            - git pull origin develop
+            - git merge --no-edit -m "merged branch master into develop" master
+            - git push

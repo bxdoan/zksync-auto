@@ -10,15 +10,6 @@ python-dotenv = "*"
 python-json-config = "*"
 pytest = "*"
 openpyxl = "*"
-uniswap-python = "*"
-
-eip712_structs = "*"
-eth_account = "*"
-eth_typing = "*"
-eth_utils = "*"
-hexbytes = "*"
-rlp = "*"
-web3 = "*"
 
 
 [dev-packages]

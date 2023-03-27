@@ -1,0 +1,13 @@
+# zksync
+zksync2
+requests
+
+# dev
+python-json-config
+python-dotenv
+openpyxl
+
+# test
+flake8
+pytest
+pytest-cov

@@ -10,6 +10,8 @@ NOTE: If you don't want to having problems with claim for a possible Zksync aird
 - Mint NFTs in Zksync Era network every X days.
 
 ## System Requirements:
+
+### Python packages
 ```shell
 pip install -r requirements.txt
 ```
@@ -18,9 +20,17 @@ or using pyenv and pipenv
 pipenv install
 ```
 
+### Configurations
+Set update some config file in `config.json` file.
+```shell
+cp .env.example .env
+cp config.example.json config.json
+```
+
+You can create url `network` for `eth` and `zksync` from Alchemy by yourself and update it into `config.json`.
+read [alchemy](./alchemy.md)
 
 ## Usage
-### Install
 ```sh
 ./run.sh
 ```

@@ -11,7 +11,12 @@ HOME_PACKAGE = os.path.abspath(os.path.dirname(__file__) + '/package')
 TMP_FOLDER = '/tmp'
 TMP_ZKSYNC = '/tmp/zksync'
 os.makedirs(TMP_ZKSYNC, exist_ok=True)
-ACC_PATH = os.path.join(os.path.dirname(__file__), os.pardir, os.environ.get('ACC_PATH'))
+
+ACC_PATH = os.environ.get('ACC_PATH')
+try:
+    ACC_PATH = os.path.join(os.path.dirname(__file__), os.pardir, os.environ.get('ACC_PATH'))
+except Exception as e:
+    print(e)
 
 
 def get_config():

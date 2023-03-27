@@ -4,7 +4,7 @@
     "zksync": "https://zksync2-testnet.zksync.dev"
   },
   "acc": {
-    "add": "0x123",
-    "pri": "123"
+    "add": "address",
+    "pri": "private key"
   }
 }

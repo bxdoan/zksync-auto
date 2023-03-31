@@ -1,6 +1,7 @@
 import csv
 import json
 import openpyxl
+import requests
 
 from zksync_auto.config import ONEINCH_PACKAGE
 
@@ -50,4 +51,20 @@ def load_abi(file_name):
     fp = f'{ONEINCH_PACKAGE}/{file_name}'
     with open(fp, 'r') as f:
         abi = json.load(f)
-        return abi
+        return abi['result']
+
+
+def parse_response(response: requests.Response):
+    try:
+        result = response.json()
+    except Exception:
+        result = response.text
+    return result
+
+
+def parse_error_response(e: requests.exceptions.HTTPError):
+    if isinstance(e, requests.exceptions.HTTPError):
+        resp = getattr(e, 'response', None)
+        if isinstance(resp, requests.Response):
+            return parse_response(resp)
+    return "Unknown error"

@@ -1,3 +1,5 @@
+![](./zkSync-logo.png)
+
 # zksync-auto
 
 Python script to send ETH transactions and mint NFTs in Zksync Era network every X days. 
@@ -23,7 +25,7 @@ pipenv install
 ### Configurations
 Set update some config file in `config.json` file.
 ```shell
-cp .env.example .env
+cp .env-example .env
 cp config.example.json config.json
 cp accounts.example.csv accounts.csv
 ```

@@ -21,7 +21,7 @@ class ZksyncAuto(object):
         self.acc = config.acc
         self.list_acc = AccountLoader().parser_file()
 
-        self.web3 = ZkSyncBuilder.build(self.network.zksync)
+        self.zksync_web3 = ZkSyncBuilder.build(self.network.zksync)
         self.eth_web3 = Web3(Web3.HTTPProvider(self.network.eth))
         self.account: LocalAccount = Account.from_key(self.acc.pri)
 
@@ -30,31 +30,41 @@ class ZksyncAuto(object):
             if not anount:
                 return
 
-            gas_price = self.web3.eth.gas_price
-            print(f"gas price: {gas_price=}")
+            zk_gas_price = self.zksync_web3.eth.gas_price
+            eth_gas_price = self.eth_web3.eth.gas_price
+            print(f"{zk_gas_price=} and {eth_gas_price=}")
             self.eth_web3.middleware_onion.inject(geth_poa_middleware, layer=0)
-            gas_provider = StaticGasProvider(Web3.toWei(1, "gwei"), gas_price)
-            eth_provider = EthereumProvider.build_ethereum_provider(zksync=self.web3,
-                                                                    eth=self.eth_web3,
-                                                                    account=self.account,
-                                                                    gas_provider=gas_provider)
-            tx_receipt = eth_provider.deposit(Token.create_eth(),
-                                              self.eth_web3.toWei(Decimal(1), "ether"),
-                                              self.account.address)
+            gas_fee = round(1555000 * 1.3)
+            print(f"gas fee: {gas_fee=}")
+            gas_provider = StaticGasProvider(Web3.toWei(100, "gwei"), gas_fee)
+            eth_provider = EthereumProvider.build_ethereum_provider(
+                zksync=self.zksync_web3,
+                eth=self.eth_web3,
+                account=self.account,
+                gas_provider=gas_provider
+            )
+            tx_receipt = eth_provider.deposit(
+                token=Token.create_eth(),
+                amount=Web3.toWei(anount, "ether"),
+                user_address=self.account.address
+            )
             print(f"tx status: {tx_receipt['status']}")
+            print(f"tx tx_receipt: {tx_receipt}")
+
         except Exception as _e:
             print(f"Error: {_e}")
 
     def l1_balance(self, account: LocalAccount = None):
         if not account:
             account = self.account
+        print(f"Account: {account.address}")
         eth_balance = self.eth_web3.eth.get_balance(account.address)
         print(f"Eth balance: {Web3.fromWei(eth_balance, 'ether')}")
 
     def l2_balance(self, account: LocalAccount = None):
         if not account:
             account = self.account
-        zk_balance = self.web3.zksync.get_balance(account.address, EthBlockParams.LATEST.value)
+        zk_balance = self.zksync_web3.zksync.get_balance(account.address, EthBlockParams.LATEST.value)
         print(f"ZkSync balance: {Web3.fromWei(zk_balance, 'ether')}")
 
     def l2_balance_all(self):
@@ -70,10 +80,13 @@ def process():
     zksync_auto = ZksyncAuto()
 
     # get zksync balance
-    zksync_auto.l2_balance_all()
+    zksync_auto.l1_balance()
+    zksync_auto.l2_balance()
 
     # deposit eth to zksync
-    zksync_auto.deposit(anount=0.01)
+    zksync_auto.deposit(anount=1)
+
+    # transfer eth from zksync to zksync
 
     # withdraw eth from zksync
     # zksync_auto.withdraw(anount=0.01)

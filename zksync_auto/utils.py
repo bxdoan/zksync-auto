@@ -1,9 +1,8 @@
 import csv
 import json
-
 import openpyxl
 
-from zksync_auto.config import CODE_HOME, HOME_PACKAGE
+from zksync_auto.config import ONEINCH_PACKAGE
 
 
 def read_xlsx_file(dir_file: str, column_mapping: dict = None, sheet_name: str = None) -> list:
@@ -48,7 +47,7 @@ def read_csv_file(dir_file: str, column_mapping: dict = None) -> list:
 
 
 def load_abi(file_name):
-    fp = f'{HOME_PACKAGE}/{file_name}'
+    fp = f'{ONEINCH_PACKAGE}/{file_name}'
     with open(fp, 'r') as f:
         abi = json.load(f)
         return abi

@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 logger = logging.getLogger(__name__)
 CODE_HOME = os.path.abspath(os.path.dirname(__file__) + '/..')
-HOME_PACKAGE = os.path.abspath(os.path.dirname(__file__) + '/package')
+ONEINCH_PACKAGE = os.path.abspath(os.path.dirname(__file__) + '/oneinch/package')
 TMP_FOLDER = '/tmp'
 TMP_ZKSYNC = '/tmp/zksync'
 os.makedirs(TMP_ZKSYNC, exist_ok=True)

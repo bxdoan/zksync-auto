@@ -25,6 +25,7 @@ Set update some config file in `config.json` file.
 ```shell
 cp .env.example .env
 cp config.example.json config.json
+cp accounts.example.csv accounts.csv
 ```
 
 You can create url `network` for `eth` and `zksync` from Alchemy by yourself and update it into `config.json`.

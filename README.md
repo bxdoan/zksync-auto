@@ -34,6 +34,12 @@ You can create url `network` for `eth` and `zksync` from Alchemy by yourself and
 read [alchemy](./alchemy.md)
 
 ## Usage
+run with python
+```sh
+python zksync_auto/app.py
+```
+
+or run with pipenv setup
 ```sh
 ./run.sh
 ```

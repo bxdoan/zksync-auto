@@ -5,6 +5,7 @@ COLUMN_MAPPING = {
     'Name': 'name',
     'Address': 'address',
     'Private Key': 'private_key',
+    "Seed Phrase": 'seed_phrase',
     'Description': 'description',
 }
 

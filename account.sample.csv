@@ -1,2 +1,2 @@
-"Name","Address","Private Key","Description"
-"air 1","0x123","123","air for zksync"
+"Name","Address","Private Key","Seed Phrase","Description"
+"air 1","0x123","123","Seed Phrase","air for zksync"

@@ -3,12 +3,9 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from eth_account import Account
 from eth_account.signers.local import LocalAccount
-from zksync2.manage_contracts.gas_provider import StaticGasProvider
 from zksync2.module.module_builder import ZkSyncBuilder
-from zksync2.core.types import Token
 from zksync2.provider.eth_provider import EthereumProvider
-from zksync2.signer.eth_signer import PrivateKeyEthSigner
-from zksync2.core.types import Token, ZkBlockParams, BridgeAddresses, EthBlockParams
+from zksync2.core.types import Token, EthBlockParams
 
 from zksync_auto.config import config
 from zksync_auto.account import AccountLoader
@@ -33,14 +30,17 @@ class ZksyncAuto(object):
             gas_price = self.web3.eth.gas_price
             print(f"gas price: {gas_price=}")
             self.eth_web3.middleware_onion.inject(geth_poa_middleware, layer=0)
-            gas_provider = StaticGasProvider(Web3.toWei(1, "gwei"), gas_price)
-            eth_provider = EthereumProvider.build_ethereum_provider(zksync=self.web3,
-                                                                    eth=self.eth_web3,
-                                                                    account=self.account,
-                                                                    gas_provider=gas_provider)
-            tx_receipt = eth_provider.deposit(Token.create_eth(),
-                                              self.eth_web3.toWei(Decimal(1), "ether"),
-                                              self.account.address)
+            eth_provider = EthereumProvider(
+                zksync_web3=self.web3,
+                eth_web3=self.eth_web3,
+                l1_account=self.account
+            )
+            tx_receipt = eth_provider.deposit(
+                token=Token.create_eth(),
+                amount=Web3.to_wei(anount, "ether"),
+                to=self.account.address,
+                gas_price=gas_price,
+            )
             print(f"tx status: {tx_receipt['status']}")
         except Exception as _e:
             print(f"Error: {_e}")
@@ -70,7 +70,7 @@ def process():
     zksync_auto = ZksyncAuto()
 
     # get zksync balance
-    zksync_auto.l2_balance_all()
+    # zksync_auto.l2_balance_all()
 
     # deposit eth to zksync
     zksync_auto.deposit(anount=0.01)
